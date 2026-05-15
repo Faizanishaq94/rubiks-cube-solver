@@ -1,6 +1,6 @@
 # Rubik's Cube Solver
 
-A full-stack SaaS application that solves a scrambled Rubik's Cube from photos. Users upload one image per face, and the system uses AI to detect the tile colours and compute an optimal step-by-step solution.
+A full-stack application that solves a scrambled Rubik's Cube from photos. Users upload one image per face, and the system uses AI to detect the tile colours and compute an optimal step-by-step solution.
 
 ## Repositories
 
@@ -8,6 +8,8 @@ A full-stack SaaS application that solves a scrambled Rubik's Cube from photos. 
 |------|-------------|
 | [rubiks-cube-backend](https://github.com/faizanishaq94/rubiks-cube-backend) | Core API — job creation, image processing pipeline, AI tile detection, cube solving |
 | [rubiks-cube-auth](https://github.com/faizanishaq94/rubiks-cube-auth) | Authentication service — registration, login, token management via AWS Cognito |
+| rubiks-cube-solver-web *(coming soon)* | Next.js web frontend — job submission, status polling, solution display |
+| rubiks-cube-solver-mobile *(coming soon)* | React Native + Expo mobile app — iOS and Android |
 
 ## Architecture
 
@@ -93,3 +95,11 @@ Handles all job lifecycle — creation, status tracking, and result storage. Run
 ### rubiks-cube-auth
 
 Wraps AWS Cognito to provide a clean REST API for the full authentication lifecycle — register, confirm email, login, token refresh, logout, forgot/reset password, and get current user. On registration, the service writes the user to its own PostgreSQL table and rolls back the Cognito record if the database write fails, keeping the two systems in sync.
+
+### rubiks-cube-solver-web *(coming soon)*
+
+Next.js web frontend with a dark-mode design system. Features a 6-face drag-and-drop photo uploader, real-time job status polling, and solution display using WCA move notation.
+
+### rubiks-cube-solver-mobile *(coming soon)*
+
+React Native + Expo mobile app targeting iOS and Android. Mirrors the web feature set with native navigation, camera/gallery integration for photo capture, and secure token storage via `expo-secure-store`.
