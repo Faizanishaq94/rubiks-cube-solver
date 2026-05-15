@@ -7,7 +7,7 @@ A full-stack application that solves a scrambled Rubik's Cube from photos. Users
 | Repo | Description |
 |------|-------------|
 | [rubiks-cube-backend](https://github.com/faizanishaq94/rubiks-backend-service) | Core API — job creation, image processing pipeline, AI tile detection, cube solving |
-| [rubiks-cube-auth](https://github.com/faizanishaq94/rubiks-cube-auth-service) | Authentication service — registration, login, token management via AWS Cognito |
+| [rubiks-cube-auth](https://github.com/faizanishaq94/rubiks-auth-service) | Authentication service — registration, login, token management via AWS Cognito |
 | rubiks-cube-solver-web *(coming soon)* | Next.js web frontend — job submission, status polling, solution display |
 | rubiks-cube-solver-mobile *(coming soon)* | React Native + Expo mobile app — iOS and Android |
 
