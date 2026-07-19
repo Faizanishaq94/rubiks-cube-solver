@@ -6,16 +6,16 @@ A full-stack application that solves a scrambled Rubik's Cube from photos. Users
 
 | Repo | Description |
 |------|-------------|
-| [rubiks-cube-backend](https://github.com/faizanishaq94/rubiks-backend-service) | Core API — job creation, image processing pipeline, AI tile detection, cube solving |
-| [rubiks-cube-auth](https://github.com/faizanishaq94/rubiks-auth-service) | Authentication service — registration, login, token management via AWS Cognito |
-| rubiks-cube-solver-web *(coming soon)* | Next.js web frontend — job submission, status polling, solution display |
+| [rubiks-cube-backend](https://github.com/faizanishaq94/rubiks-cube-backend) | Core API — job creation, image processing pipeline, AI tile detection, cube solving |
+| [rubiks-cube-auth](https://github.com/faizanishaq94/rubiks-cube-auth) | Authentication service — registration, login, token management via AWS Cognito |
+| [rubiks-cube-solver-web](https://github.com/Faizanishaq94/rubiks-cube-solver-web) | Vite + React web frontend — job submission, status polling, solution display |
 | rubiks-cube-solver-mobile *(coming soon)* | React Native + Expo mobile app — iOS and Android |
 
 ## Architecture
 
 ```
 ┌──────────────┐     ┌──────────────┐
-│  Next.js Web │     │ React Native │
+│ Vite + React │     │ React Native │
 │   Frontend   │     │  Mobile App  │
 └──────┬───────┘     └──────┬───────┘
        │                    │
@@ -69,7 +69,7 @@ A full-stack application that solves a scrambled Rubik's Cube from photos. Users
 | Message queue | AWS SQS |
 | AI / tile detection | Anthropic Claude |
 | Cube solving | Kociemba's algorithm |
-| Web frontend | Next.js + React + Tailwind CSS |
+| Web frontend | Vite + React + React Router + TanStack Query + Zustand + Tailwind CSS |
 | Mobile frontend | React Native + Expo |
 | Validation | Zod |
 | Containerisation | Docker (multi-stage builds) |
@@ -96,9 +96,9 @@ Handles all job lifecycle — creation, status tracking, and result storage. Run
 
 Wraps AWS Cognito to provide a clean REST API for the full authentication lifecycle — register, confirm email, login, token refresh, logout, forgot/reset password, and get current user. On registration, the service writes the user to its own PostgreSQL table and rolls back the Cognito record if the database write fails, keeping the two systems in sync.
 
-### rubiks-cube-solver-web *(coming soon)*
+### rubiks-cube-solver-web
 
-Next.js web frontend with a dark-mode design system. Features a 6-face drag-and-drop photo uploader, real-time job status polling, and solution display using WCA move notation.
+Vite + React web frontend with a dark-mode design system. Uses React Router v7 for routing, TanStack Query for server state (job data, polling), and Zustand for auth/session state — access tokens are held in memory only, with a shared in-flight refresh so concurrent 401s trigger a single token refresh instead of racing. Features a 6-face drag-and-drop photo uploader (with a full keyboard-accessible fallback), real-time job status polling, and solution display using WCA move notation. Required environment variables are validated at startup rather than silently falling back to broken API URLs, and a root-level error boundary shows a friendly fallback instead of a blank screen on unexpected render errors.
 
 ### rubiks-cube-solver-mobile *(coming soon)*
 
